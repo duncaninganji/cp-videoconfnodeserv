@@ -20,10 +20,10 @@ export async function fetchAccessToken(req, res, next) {
     method: 'POST',
     url: ZOOM_ACCESS_TOKEN_URL,
     headers: { 'Authorization': ZOOM_AUTH_HEADER},
-    data: qs.stringify({
-        'grant_type': 'authorization_code',
-        'code': authCode,
-        'redirect_uri': ZOOM_REDIRECT_URI
+    params: qs.stringify({
+      'grant_type': 'authorization_code',
+      'code': authCode,
+      'redirect_uri': ZOOM_REDIRECT_URI
     })
   }
   
@@ -51,9 +51,9 @@ export async function refreshAccessToken(req, res, next) {
     method: 'POST',
     url: ZOOM_ACCESS_TOKEN_URL,
     headers: { 'Authorization': ZOOM_AUTH_HEADER},
-    data: qs.stringify({
-        'grant_type': 'refresh_token',
-        'refresh_token': req.body.token.refresh_token
+    params: qs.stringify({
+      'grant_type': 'refresh_token',
+      'refresh_token': req.body.token.refresh_token
     })
   }
   
@@ -86,8 +86,8 @@ export async function revokeAccessToken(req, res, next) {
     method: 'POST',
     url: ZOOM_REVOKE_ACCESS_URL,
     headers: { 'Authorization': ZOOM_AUTH_HEADER},
-    data: qs.stringify({
-        'token': tokenObj.access_token
+    params: qs.stringify({
+      'token': tokenObj.access_token
     })
   }
   
