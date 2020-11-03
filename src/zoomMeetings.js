@@ -39,12 +39,13 @@ export async function createMeeting(req, res, next) {
 }
 
 export async function getMeeting(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or")
   }
 
-  const { zoomId, userId, meetingId, token } = req.body
+  const { zoomId, userId, token } = req.body
+  const meetingId = req.params.meetingId || ''
   const url = `https://api.zoom.us/v2/meetings/${meetingId}`
   const headers = {
     'Authorization': `Bearer ${token}`
@@ -97,12 +98,13 @@ export async function getAllMeetingsForUser(req, res, next) {
 } 
 
 export async function updateMeeting(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { zoomId, userId, meetingId, token, updateObj } = req.body
+  const { zoomId, userId, token, updateObj } = req.body
+  const meetingId = req.params.meetingId || ''
   const url = `https://api.zoom.us/v2/meetings/${meetingId}`
   const headers = {
     'Content-Transfer-Encoding': 'application/json',
@@ -127,13 +129,15 @@ export async function updateMeeting(req, res, next) {
     })
 }
 
+// currently unused in the API
 export async function updateMeetingStatus(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { zoomId, userId, meetingId, token, updateObj } = req.body
+  const { zoomId, userId, token, updateObj } = req.body
+  const meetingId = req.params.meetingId || ''
   const url = `https://api.zoom.us/v2/meetings/${meetingId}`
   const headers = {
     'Content-Transfer-Encoding': 'application/json',
@@ -159,12 +163,13 @@ export async function updateMeetingStatus(req, res, next) {
 }
 
 export async function deleteMeeting(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { zoomId, userId, meetingId, token } = req.body
+  const { zoomId, userId, token } = req.body
+  const meetingId = req.params.meetingId || ''
   const url = `https://api.zoom.us/v2/meetings/${meetingId}`
   const headers = {
     'Authorization': `Bearer ${token}`
@@ -192,12 +197,13 @@ export async function deleteMeeting(req, res, next) {
 }
 
 export async function listMeetingRegistrants(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { zoomId, userId, meetingId, token } = req.body
+  const { zoomId, userId, token } = req.body
+  const meetingId = req.params.meetingId || ''
   const url = `https://api.zoom.us/v2/meetings/${meetingId}/registrants`
   const headers = {
     'Authorization': `Bearer ${token}`
@@ -224,12 +230,13 @@ export async function listMeetingRegistrants(req, res, next) {
 }
 
 export async function updateMeetingRegistrants(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { zoomId, userId, meetingId, token, updateObj } = req.body
+  const { zoomId, userId, token, updateObj } = req.body
+  const meetingId = req.params.meetingId || ''
   const url = `https://api.zoom.us/v2/meetings/${meetingId}/registrants/status`
   const headers = {
     'Content-Transfer-Encoding': 'application/json',

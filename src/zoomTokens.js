@@ -14,7 +14,9 @@ export async function fetchAccessToken(req, res, next) {
     return res.status(404).send("Request object missing body")
   }
 
-  const { authCode } = req.body
+  if (req.body.token) return next();
+  
+  const { authCode } = req.body 
 
   const options = {
     method: 'POST',
@@ -22,7 +24,7 @@ export async function fetchAccessToken(req, res, next) {
     headers: { 'Authorization': ZOOM_AUTH_HEADER},
     params: qs.stringify({
       'grant_type': 'authorization_code',
-      'code': authCode,
+      'code': authCode || '',
       'redirect_uri': ZOOM_REDIRECT_URI
     })
   }
