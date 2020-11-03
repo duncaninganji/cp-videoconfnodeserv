@@ -39,12 +39,13 @@ export async function createWebinar(req, res, next) {
 }
 
 export async function getWebinar(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { zoomId, userId, webinarId, token } = req.body
+  const { zoomId, userId, token } = req.body
+  const webinarId = req.params.webinarId || ''
   const url = `https://api.zoom.us/v2/webinars/${webinarId}`
   const headers = {
     'Authorization': `Bearer ${token}`
@@ -97,12 +98,13 @@ export async function getAllWebinarsForUser(req, res, next) {
 } 
 
 export async function updateWebinar(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { zoomId, userId, webinarId, token, updateObj } = req.body
+  const { zoomId, userId, token, updateObj } = req.body
+  const webinarId = req.params.webinarId || ''
   const url = `https://api.zoom.us/v2/webinars/${webinarId}`
   const headers = {
     'Content-Transfer-Encoding': 'application/json',
@@ -128,12 +130,13 @@ export async function updateWebinar(req, res, next) {
 }
 
 export async function updateWebinarStatus(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { zoomId, userId, webinarId, token, updateObj } = req.body
+  const { zoomId, userId, token, updateObj } = req.body
+  const webinarId = req.params.webinarId || ''
   const url = `https://api.zoom.us/v2/webinars/${webinarId}`
   const headers = {
     'Content-Transfer-Encoding': 'application/json',
@@ -159,12 +162,13 @@ export async function updateWebinarStatus(req, res, next) {
 }
 
 export async function deleteWebinar(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { zoomId, userId, webinarId, token } = req.body
+  const { zoomId, userId, token } = req.body
+  const webinarId = req.params.webinarId || ''
   const url = `https://api.zoom.us/v2/webinars/${webinarId}`
   const headers = {
     'Authorization': `Bearer ${token}`
@@ -191,12 +195,13 @@ export async function deleteWebinar(req, res, next) {
 }
 
 export async function listWebinarPanelists(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { zoomId, userId, webinarId, token } = req.body
+  const { zoomId, userId, token } = req.body
+  const webinarId = req.params.webinarId || ''
   const url = `https://api.zoom.us/v2/webinars/${webinarId}/panelists`
   const headers = {
     'Authorization': `Bearer ${token}`
@@ -220,12 +225,13 @@ export async function listWebinarPanelists(req, res, next) {
 }
 
 export async function addPanelists(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { webinarId, token, panelists} = req.body
+  const { token, panelists} = req.body
+  const webinarId = req.params.webinarId || ''
   const url = `https://api.zoom.us/v2/webinars/${webinarId}/panelists`
   const headers = {
     'Authorization': `Bearer ${token}`
@@ -250,12 +256,14 @@ export async function addPanelists(req, res, next) {
 }
 
 export async function removePanelist(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { webinarId, token, panelistId} = req.body
+  const { token } = req.body
+  const webinarId = req.params.webinarId || ''
+  const panelistId = req.params.panelistId || ''
   const url = `https://api.zoom.us/v2/webinars/${webinarId}/panelists/${panelistId}`
   const headers = {
     'Authorization': `Bearer ${token}`
@@ -282,12 +290,13 @@ export async function removePanelist(req, res, next) {
 }
 
 export async function removeAllPanelists(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { webinarId, token} = req.body
+  const { token } = req.body
+  const webinarId = req.params.webinarId || ''
   const url = `https://api.zoom.us/v2/webinars/${webinarId}/panelists`
   const headers = {
     'Authorization': `Bearer ${token}`
@@ -314,12 +323,13 @@ export async function removeAllPanelists(req, res, next) {
 }
 
 export async function listWebinarRegistrants(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { webinarId, token} = req.body
+  const { token } = req.body
+  const webinarId = req.params.webinarId || ''
   const url = `https://api.zoom.us/v2/webinars/${webinarId}/registrants`
   const headers = {
     'Authorization': `Bearer ${token}`
@@ -346,12 +356,13 @@ export async function listWebinarRegistrants(req, res, next) {
 }
 
 export async function addWebinarRegistrants(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { webinarId, token, registrantObj} = req.body
+  const { token, registrantsObj} = req.body
+  const webinarId = req.params.webinarId || ''
   const url = `https://api.zoom.us/v2/webinars/${webinarId}/registrants`
   const headers = {
     'Content-Transfer-Encoding': 'application/json',
@@ -360,29 +371,30 @@ export async function addWebinarRegistrants(req, res, next) {
 
   const options = {
     method: 'POST',
-    body: registrantObj,
+    body: registrantsObj,
     headers,
     url,
   }
 
   axios(options)
     .then(() => {
-      console.log(`Registrant added to webinar with id ${webinarId}`);
-      return res.status(200).send(`Registrant added to webinar with id ${webinarId}`);
+      console.log(`Registrants added to webinar with id ${webinarId}`);
+      return res.status(200).send(`Registrants added to webinar with id ${webinarId}`);
     })
     .catch(error => {
       console.error(error)
-      return res.status(error.response.status || 404).send(`Error adding registrant to webinar with id ${webinarId}`)
+      return res.status(error.response.status || 404).send(`Error adding registrants to webinar with id ${webinarId}`)
     })
 }
 
 export async function updateWebinarRegistrants(req, res, next) {
-  if (!req.body) {
-    console.log("Request object missing body")
-    return res.status(400).send("Request object missing body")
+  if (!req.body || !req.params) {
+    console.log("Request object missing body or params")
+    return res.status(400).send("Request object missing body or params")
   }
 
-  const { webinarId, token, updateObj} = req.body
+  const { token, updateObj} = req.body
+  const webinarId =  req.params.webinarId
   const url = `https://api.zoom.us/v2/webinars/${webinarId}/registrants/status`
   const headers = {
     'Content-Transfer-Encoding': 'application/json',
