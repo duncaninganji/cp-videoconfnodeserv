@@ -1,5 +1,11 @@
 export const TOKENS_COLLECTION_ID = 'tokens';
 
+export const CAREER_FAIR_STUDENTS_COLLECTION_ID = 'students';
+
+export const CAREER_FAIR_RECRUITERS_COLLECTION_ID = 'recruiters';
+
+export const CAREER_FAIR_WEBINARS_COLLECTION_ID = 'careerfair_webinars';
+
 export const ZOOM_ACCESS_TOKEN_URL = 'https://zoom.us/oauth/token';
 
 export const ZOOM_REVOKE_ACCESS_URL = 'https://zoom.us/oauth/revoke';

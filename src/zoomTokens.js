@@ -8,6 +8,7 @@ import {
 } from './constants.js';
 import { ZOOM_REVOKE_ACCESS_URL } from './constants.js';
 
+// https://marketplace.zoom.us/docs/guides/auth/oauth
 export async function fetchAccessToken(req, res, next) {
   if (!req.body) {
     console.log("Request object missing body")

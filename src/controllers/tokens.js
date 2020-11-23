@@ -1,7 +1,7 @@
 import moment from 'moment';
 import Firestore from '@google-cloud/firestore';
 import { TOKENS_COLLECTION_ID } from '../constants.js';
-
+// https://marketplace.zoom.us/docs/guides/auth/oauth
 // create a new client
 const firestore = new Firestore();
 
@@ -59,9 +59,10 @@ export async function getAccessToken(req, res, next) {
     })
     .catch(error => {
       console.error(error)
-      res.status(404).send("Error fetching token from database")
+      return res.status(404).send("Error fetching token from database")
     })
 }
+
 
 export function checkIfTokenExpired(req, res, next) {
   if (!req.body) {
@@ -94,7 +95,7 @@ export async function updateAccessToken(req, res, next) {
     })
     .catch(error => {
       console.error(error)
-      res.status(404).send('Error updating token')
+      return res.status(404).send('Error updating token')
     });
 }
 
@@ -119,6 +120,6 @@ export async function deleteAccessToken(req, res) {
     })
     .catch(error => {
       console.error(error)
-      res.status(404).send("Error deleting token")
+      return res.status(404).send("Error deleting token")
     })
 }
