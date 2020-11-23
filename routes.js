@@ -3,6 +3,7 @@ import * as tokensAPI from './src/controllers/tokens.js';
 import * as zoomOauthAPI from './src/zoomTokens.js';
 import * as meetingsAPI from './src/zoomMeetings.js';
 import * as webinarsAPI from './src/zoomWebinars.js';
+import * as careerFairsAPI from './src/controllers/careerfairs.js';
 
 const router = express.Router()
 
@@ -61,5 +62,12 @@ router.get('/webinars/registrants/:webinarId', webinarsAPI.listWebinarRegistrant
 router.post('/webinars/registrants/:webinarId', webinarsAPI.addWebinarRegistrants)
 // update webinar registrants
 router.put('/webinars/registrants/:webinarId', webinarsAPI.updateWebinarRegistrants)
+
+
+// get all available webinars for a career fair
+router.get('/careerfairs/webinars/:careerfairId', careerFairsAPI.getWebinars)
+
+// get the schedule for a particular user
+router.get('/careerfairs/schedules/:careerfairId/:userId', careerFairsAPI.getScheduleById)
 
 export default router
