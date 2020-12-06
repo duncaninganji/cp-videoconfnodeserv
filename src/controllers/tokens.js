@@ -40,7 +40,7 @@ export async function getAccessToken(req, res, next) {
     return res.status(404).send("Request object missing id query")
   }
 
-  const userId = req.body.userId || ''
+  const userId = req.params.userId || ''
 
   firestore
     .collection(TOKENS_COLLECTION_ID)

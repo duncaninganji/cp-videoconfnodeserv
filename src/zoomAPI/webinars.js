@@ -1,5 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
+import { ADD_UPDATE_TYPE, DELETE_UPDATE_TYPE } from '../constants.js';
+
 // https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/webinars
 
 // req object should have the zoomId as well as the userId
@@ -28,8 +30,11 @@ export async function createWebinar(req, res, next) {
 
   axios(options)
     .then(webinarObj => {
-      console.log(JSON.stringify(webinarObj));
-      return res.status(200).json(webinarObj.response.data);
+      webinar = webinarObj.response.data
+      console.log(webinar);
+      req.body.webinar = webinar
+      req.body.updateType = ADD_UPDATE_TYPE
+      return next()
     })
     .catch(error => {
       console.error(error)
@@ -58,8 +63,10 @@ export async function getWebinar(req, res, next) {
 
   axios(options)
     .then(webinarObj => {
-      console.log(JSON.stringify(webinarObj));
-      return res.status(200).json(webinarObj.response.data);
+      webinar = webinarObj.response.data()
+      console.log(webinar)
+      req.body.webinar = webinar
+      return next()
     })
     .catch(error => {
       console.error(error)
@@ -88,8 +95,10 @@ export async function getAllWebinarsForUser(req, res, next) {
 
   axios(options)
     .then(webinarsList => {
-      console.log(JSON.stringify(webinarsList));
-      return res.status(200).json(webinarsList.response.data);
+      webinars = webinarsList.response.data
+      console.log(webinars);
+      req.body.webinars = webinars.webinars
+      return next()
     })
     .catch(error => {
       console.error(error)
@@ -185,8 +194,9 @@ export async function deleteWebinar(req, res, next) {
 
   axios(options)
     .then(() => {
-      console.log(`Webinar with id${webinarId} successfully deleted`);
-      return res.status(200).send(`Webinar with id${webinarId} successfully deleted`);
+      console.log(`Webinar with id${webinarId} successfully deleted from Zoom`);
+      req.body.updateType = DELETE_UPDATE_TYPE
+      return next()
     })
     .catch(error => {
       console.error(error)
@@ -379,7 +389,7 @@ export async function addWebinarRegistrants(req, res, next) {
   axios(options)
     .then(() => {
       console.log(`Registrants added to webinar with id ${webinarId}`);
-      return res.status(200).send(`Registrants added to webinar with id ${webinarId}`);
+      return next()
     })
     .catch(error => {
       console.error(error)
