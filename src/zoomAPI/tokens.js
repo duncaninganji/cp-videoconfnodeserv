@@ -5,8 +5,8 @@ import {
   ZOOM_AUTH_HEADER, 
   ZOOM_ACCESS_TOKEN_URL, 
   ZOOM_REDIRECT_URI 
-} from './constants.js';
-import { ZOOM_REVOKE_ACCESS_URL } from './constants.js';
+} from './constants.js.js';
+import { ZOOM_REVOKE_ACCESS_URL } from './constants.js.js';
 
 // https://marketplace.zoom.us/docs/guides/auth/oauth
 export async function fetchAccessToken(req, res, next) {

@@ -17,4 +17,8 @@ export const ZOOM_CREDENTIALS = {
   "client_secret": "yhiTLIpKx31tfjxUUjz2eT9kV2oqzOF1"
 }
 
+export const ADD_UPDATE_TYPE = 'add'
+
+export const DELETE_UPDATE_TYPE = 'delete'
+
 export const ZOOM_AUTH_HEADER = Buffer.from(ZOOM_CREDENTIALS.client_id.concat(':', ZOOM_CREDENTIALS.client_secret)).toString('base64');

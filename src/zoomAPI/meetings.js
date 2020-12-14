@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-
+// https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingcreate
 
 // req object should have the zoomId as well as the userId
 // token should have been added to the body of the request object 
@@ -27,9 +27,12 @@ export async function createMeeting(req, res, next) {
   }
 
   axios(options)
-    .then(meetingObj => {
-      console.log(JSON.stringify(meetingObj));
-      return res.status(200).json(meetingObj.response.data);
+    .then(meeting => {
+      meeting = meeting.response.data()
+      console.log(meeting);
+      req.body.meeting = meeting
+      req.body.updateType = ADD_UPDATE_TYPE
+      return next()
     })
     .catch(error => {
       console.error(error)
@@ -88,8 +91,10 @@ export async function getAllMeetingsForUser(req, res, next) {
 
   axios(options)
     .then(meetingsList => {
-      console.log(JSON.stringify(meetingsList));
-      return res.status(200).json(meetingsList.response.data);
+      meetings = meetingsList.response.data
+      console.log(meetings);
+      req.body.meetings = meetings
+      return next()
     })
     .catch(error => {
       console.error(error)
