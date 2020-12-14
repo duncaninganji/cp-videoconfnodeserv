@@ -2,7 +2,7 @@ const { env } = process.env || 'development';
 const port = env ? env.PORT || 8081 : 8081;
 const host = env ? env.host || 'localhost': 'localhost'
 
-const options = {
+export const options = {
   development: {
     serviceTimeout: 30,
     port,
@@ -23,6 +23,6 @@ const options = {
   },
 };
 
-export const nodeEnv = env ? env.NODE_ENV || 'development': 'development';
+// export const nodeEnv = env ? env.NODE_ENV || 'development': 'development';
 
-export default options[nodeEnv];
+
